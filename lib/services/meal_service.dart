@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';                               //importar .io
 import 'package:http/http.dart' as http;
 import 'package:meals_app/models/meal.dart';
 
-class CategoryService{
+class MealService{
   //https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood=nombre_categoria
   String baseUrl="https://www.themealdb.com/api/json/v1/1/filter.php?c=";
 

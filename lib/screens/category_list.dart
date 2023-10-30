@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/category.dart';
+import 'package:meals_app/screens/meal_list.dart';
 import 'package:meals_app/services/category_service.dart';
 
 class CategoryList extends StatefulWidget {
@@ -61,12 +62,23 @@ class _CategoryItemState extends State<CategoryItem> {
     //defino la imagen
     final image=Image.network(widget.category.imageUrl);
 
-    return Card(
-      child: Column(
-        children: [
-          image,
-          Text(widget.category.name),
-        ],
+    return GestureDetector(
+
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context){
+          return MealList(categoryName: widget.category.name);
+           }
+          )
+        );
+      },
+
+      child: Card(
+        child: Column(
+          children: [
+            image,
+            Text(widget.category.name),
+          ],
+        ),
       ),
     );
   }
