@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/repositories/meal_repository.dart';
 import 'package:meals_app/services/meal_service.dart';
 
 class MealList extends StatefulWidget {
@@ -57,16 +58,56 @@ class MealItem extends StatefulWidget {
 }
 
 class _MealItemState extends State<MealItem> {
+
+  //atributos
+  bool _favorite=false;
+  MealRepository? _mealRepository;
+
+  initialize()async{
+    //_favorite toma el valor que da el metodo del repositorie al pasarle cada entidad
+    _favorite=await _mealRepository?.isFavorite(widget.meal)??false;
+    if (mounted){ //si ya se cargo toda la informacion
+      setState(() {
+        _favorite=_favorite;
+      });
+    }
+  }
+
+  @override
+  void initState(){
+    _mealRepository=MealRepository();
+    initialize();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
     final image=Image.network(widget.meal.imageUrl);
+    final my_con= _favorite? const Icon(
+      Icons.favorite,color:Colors.red,
+    ):const Icon(
+      Icons.favorite,color:Colors.grey,
+    );
 
     return Card(
       child: ListTile(
           leading: image,
           title: Text(widget.meal.name),
-          trailing: const Icon(Icons.favorite),
+          trailing: IconButton(
+              icon: my_con,
+              //dentro del click
+              onPressed: (){
+                //_favorite cambia
+                setState(() {
+                  _favorite=!_favorite;
+                });
+                //se agrega o elimina del repository
+                 //si es true lo insert, sino lo elimina
+                _favorite?_mealRepository?.insert(widget.meal):_mealRepository?.delete(widget.meal);
+              },
+          ),
       ),
     );
   }

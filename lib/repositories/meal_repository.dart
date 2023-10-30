@@ -8,14 +8,14 @@ class MealRepository{
   Future insert(Meal meal) async{
     Database db= await AppDatabase().openDb();
     //metodo de pokemon.dart
-    await db.insert(AppDatabase().tableName, meal.toMap());
+    db.insert(AppDatabase().tableName, meal.toMap());
   }
 
   //eliminar
   Future delete(Meal meal) async{
     Database db= await AppDatabase().openDb();
     //metodo de la entidad
-    await db.delete(AppDatabase().tableName,
+    db.delete(AppDatabase().tableName,
         where: "id=?", whereArgs:[meal.id]);
   }
 
