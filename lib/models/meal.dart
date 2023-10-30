@@ -21,6 +21,15 @@ class Meal{
         name=json['strMeal'],
         imageUrl=json['strMealThumb'];
 
+  //retorna un mapa con los datos que se tenga en esta clase
+  //para el repository
+  Map<String,dynamic> toMap(){
+    return {
+      'id':id,
+      'name':name,
+    };
+  }
+
 }
 
 
