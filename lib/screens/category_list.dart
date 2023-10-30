@@ -32,11 +32,14 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount:_categories?.length??0, //asigna el tamaño, sino hay le coloca 0
-      itemBuilder: (context, index){
-        return CategoryItem(category: _categories?[index]);
-      }
+    return SafeArea(
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), //muetsra 2 columnas
+        itemCount:_categories?.length??0, //asigna el tamaño, sino hay le coloca 0
+        itemBuilder: (context, index){
+          return CategoryItem(category: _categories?[index]);
+        }
+      ),
     );
   }
 }
