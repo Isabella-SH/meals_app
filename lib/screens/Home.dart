@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:meals_app/screens/category_list.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -7,7 +8,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      body: CategoryList(),
     );
   }
 }
